@@ -4,7 +4,7 @@ import DropdownPage from "./dropdown-page";
 
 export default function Navbar() {
     return (
-        <nav className="flex justify-between items-center">
+        <nav className="max-w-7xl mx-auto flex justify-between">
             <Link href="/" className="font-bold text-2xl">
                 SoccerApp
             </Link>

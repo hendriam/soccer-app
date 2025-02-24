@@ -5,7 +5,6 @@ export default async function BaseLayout({ children }: { children: React.ReactNo
     return (
         <main className="min-h-svh w-full">
             <Header />
-            <Separator className="" />
             {children}
         </main>
     );
