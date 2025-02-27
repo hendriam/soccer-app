@@ -15,7 +15,7 @@ import {
 } from "@dnd-kit/sortable";
 import { useState } from "react";
 import { PlayerType, players } from "@/data";
-import Droppable from "./lineup-builder-droppable";
+import SortableItem from "./sortable-item";
 
 export default function DragAndDropList() {
     const [lineUps, setLineUps] = useState<PlayerType[]>(players);
@@ -42,6 +42,7 @@ export default function DragAndDropList() {
     return (
         <CardContent className="py-5 bg-gray-800">
             <DndContext
+                id="builder-dnd"
                 sensors={sensors}
                 onDragEnd={handleDragEnd}
                 collisionDetection={closestCenter}
@@ -52,7 +53,7 @@ export default function DragAndDropList() {
                         items={lineUps.map((lineUp) => String(lineUp.id))}
                     >
                         {lineUps.map((lineUp) => (
-                            <Droppable key={lineUp.id} player={lineUp} />
+                            <SortableItem key={lineUp.id} player={lineUp} />
                         ))}
                     </SortableContext>
                 </div>
