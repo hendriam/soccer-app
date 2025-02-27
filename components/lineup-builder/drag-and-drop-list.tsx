@@ -4,6 +4,7 @@ import {
     DragEndEvent,
     KeyboardSensor,
     PointerSensor,
+    MouseSensor,
     closestCenter,
     useSensor,
     useSensors,
@@ -16,15 +17,21 @@ import {
 import { useState } from "react";
 import { PlayerType, players } from "@/data";
 import SortableItem from "./sortable-item";
+import { Button } from "../ui/button";
 
 export default function DragAndDropList() {
     const [lineUps, setLineUps] = useState<PlayerType[]>(players);
     const sensors = useSensors(
-        useSensor(PointerSensor),
+        useSensor(PointerSensor, {
+            activationConstraint: {
+                distance: 5,
+            },
+        }),
         useSensor(KeyboardSensor, {
             coordinateGetter: sortableKeyboardCoordinates,
         }),
     );
+
     function handleDragEnd(event: DragEndEvent) {
         const { active, over } = event;
         if (over && active.id !== over.id) {
@@ -39,25 +46,47 @@ export default function DragAndDropList() {
         }
     }
 
+    const handleOnClick = () => {
+        console.log("test");
+    };
+
     return (
         <CardContent className="py-5 bg-gray-800">
-            <DndContext
-                id="builder-dnd"
-                sensors={sensors}
-                onDragEnd={handleDragEnd}
-                collisionDetection={closestCenter}
-            >
-                <div className=" grid grid-cols-3 gap-14">
+            <div className=" grid grid-cols-3 gap-14">
+                <DndContext
+                    id="builder-dnd"
+                    sensors={sensors}
+                    onDragEnd={handleDragEnd}
+                    collisionDetection={closestCenter}
+                >
                     <SortableContext
                         strategy={rectSwappingStrategy}
                         items={lineUps.map((lineUp) => String(lineUp.id))}
                     >
                         {lineUps.map((lineUp) => (
-                            <SortableItem key={lineUp.id} player={lineUp} />
+                            <SortableItem key={lineUp.id} player={lineUp} onClick={handleOnClick} />
                         ))}
                     </SortableContext>
-                </div>
-            </DndContext>
+                </DndContext>
+
+                {/* <DndContext
+                    id="builder-dnd"
+                    // sensors={sensors}
+                    onDragEnd={handleDragEnd}
+                    collisionDetection={closestCenter}
+                >
+                    <SortableContext
+                        strategy={rectSwappingStrategy}
+                        items={lineUps.map((lineUp) => String(lineUp.id))}
+                    >
+                        {lineUps.map((lineUp) => (
+                            <Button key={lineUp.id} onClick={handleOnClick}>
+                                Onclik
+                            </Button>
+                        ))}
+                    </SortableContext>
+                </DndContext> */}
+            </div>
         </CardContent>
     );
 }
