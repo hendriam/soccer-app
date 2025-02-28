@@ -4,7 +4,6 @@ import {
     DragEndEvent,
     KeyboardSensor,
     PointerSensor,
-    MouseSensor,
     closestCenter,
     useSensor,
     useSensors,
@@ -17,7 +16,6 @@ import {
 import { useState } from "react";
 import { PlayerType, players } from "@/data";
 import SortableItem from "./sortable-item";
-import { Button } from "../ui/button";
 
 export default function DragAndDropList() {
     const [lineUps, setLineUps] = useState<PlayerType[]>(players);
@@ -52,7 +50,7 @@ export default function DragAndDropList() {
 
     return (
         <CardContent className="py-5 bg-gray-800">
-            <div className=" grid grid-cols-3 gap-14">
+            <div className=" grid grid-cols-3 gap-14 justify-items-center">
                 <DndContext
                     id="builder-dnd"
                     sensors={sensors}
@@ -68,24 +66,6 @@ export default function DragAndDropList() {
                         ))}
                     </SortableContext>
                 </DndContext>
-
-                {/* <DndContext
-                    id="builder-dnd"
-                    // sensors={sensors}
-                    onDragEnd={handleDragEnd}
-                    collisionDetection={closestCenter}
-                >
-                    <SortableContext
-                        strategy={rectSwappingStrategy}
-                        items={lineUps.map((lineUp) => String(lineUp.id))}
-                    >
-                        {lineUps.map((lineUp) => (
-                            <Button key={lineUp.id} onClick={handleOnClick}>
-                                Onclik
-                            </Button>
-                        ))}
-                    </SortableContext>
-                </DndContext> */}
             </div>
         </CardContent>
     );
