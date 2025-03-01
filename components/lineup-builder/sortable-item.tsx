@@ -34,11 +34,10 @@ export default function SortableItem(props: Props) {
                     key={props.player.id}
                     type="button"
                     onClick={props.onClick}
-                    className="flex flex-col max-w-fit items-center justify-center space-y-2 hover:opacity-50 cursor-pointer"
+                    className="flex flex-col max-w-fit items-center justify-center space-y-2 hover:opacity-50 cursor-pointer touch-none"
                 >
-                    <div className="bg-stone-600 rounded-full">
+                    <div key={props.player.id} className="bg-stone-600 rounded-full">
                         <Image
-                            key={props.player.id}
                             src={props.player.image}
                             width={50}
                             height={50}
@@ -47,7 +46,9 @@ export default function SortableItem(props: Props) {
                         />
                     </div>
 
-                    <span className="capitalize text-xs font-semibold">{props.player.name}</span>
+                    <span key={props.player.name} className="capitalize text-xs font-semibold">
+                        {props.player.name}
+                    </span>
                 </button>
             </DialogTrigger>
             <DialogSearchPlayer />
