@@ -36,7 +36,10 @@ export default function SortableItem(props: Props) {
                     onClick={props.onClick}
                     className="flex flex-col max-w-fit items-center justify-center space-y-2 hover:opacity-50 cursor-pointer touch-none"
                 >
-                    <div key={props.player.id} className="bg-stone-600 rounded-full">
+                    <div
+                        key={props.player.id}
+                        className="dark:bg-gray-600 bg-background rounded-full"
+                    >
                         <Image
                             src={props.player.image}
                             width={50}
@@ -46,7 +49,10 @@ export default function SortableItem(props: Props) {
                         />
                     </div>
 
-                    <span key={props.player.name} className="capitalize text-xs font-semibold">
+                    <span
+                        key={props.player.name}
+                        className="capitalize text-xs font-semibold text-white"
+                    >
                         {props.player.name}
                     </span>
                 </button>

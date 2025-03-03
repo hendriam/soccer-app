@@ -49,7 +49,7 @@ export default function DragAndDropList() {
     };
 
     return (
-        <CardContent className="py-5 bg-gray-800">
+        <CardContent className="py-5 dark:bg-slate-900 bg-emerald-600">
             <div className=" grid grid-cols-3 gap-14 justify-items-center">
                 <DndContext
                     id="builder-dnd"
